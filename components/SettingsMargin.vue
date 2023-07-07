@@ -7,7 +7,7 @@ const margin = defineModel<number | MarginObject>('modelValue', {
   required: true,
 })
 
-const x = computed({
+const left = computed({
   get: () => {
     if (typeof margin.value === 'number')
       return margin.value
@@ -20,11 +20,26 @@ const x = computed({
       return
     }
     margin.value.left = value
+  },
+})
+
+const right = computed({
+  get: () => {
+    if (typeof margin.value === 'number')
+      return margin.value
+
+    return margin.value.right
+  },
+  set: (value) => {
+    if (typeof margin.value === 'number') {
+      margin.value = value
+      return
+    }
     margin.value.right = value
   },
 })
 
-const y = computed({
+const top = computed({
   get: () => {
     if (typeof margin.value === 'number')
       return margin.value
@@ -37,6 +52,21 @@ const y = computed({
       return
     }
     margin.value.top = value
+  },
+})
+
+const bottom = computed({
+  get: () => {
+    if (typeof margin.value === 'number')
+      return margin.value
+
+    return margin.value.bottom
+  },
+  set: (value) => {
+    if (typeof margin.value === 'number') {
+      margin.value = value
+      return
+    }
     margin.value.bottom = value
   },
 })
@@ -64,11 +94,17 @@ const y = computed({
         <div i-ri-arrow-up-s-line />
       </button>
     </OptionItem>
-    <OptionItem title="X" nested>
-      <OptionSlider v-model="x" :min="0" :max="20" :step="1" />
+    <OptionItem title="left" nested>
+      <OptionSlider v-model="left" :min="0" :max="20" :step="1" />
     </OptionItem>
-    <OptionItem title="Y" nested>
-      <OptionSlider v-model="y" :min="0" :max="20" :step="1" />
+    <OptionItem title="right" nested>
+      <OptionSlider v-model="right" :min="0" :max="20" :step="1" />
+    </OptionItem>
+    <OptionItem title="top" nested>
+      <OptionSlider v-model="top" :min="0" :max="20" :step="1" />
+    </OptionItem>
+    <OptionItem title="bottom" nested>
+      <OptionSlider v-model="bottom" :min="0" :max="20" :step="1" />
     </OptionItem>
 
     <!-- <OptionItem title="Top" nested>
